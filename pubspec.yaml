@@ -25,9 +25,3 @@ flutter:
   # Add the assets configuration here
   assets:
     - images/
-
-  fonts:
-    - family:
-        fonts:
-          - asset:
-
