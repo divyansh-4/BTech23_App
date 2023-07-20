@@ -1,5 +1,6 @@
 // for all related system design configurations
 
+import 'package:btech_induction_2023/extensions/navigation.dart';
 import 'package:flutter/material.dart';
 
 extension System on BuildContext {
@@ -18,7 +19,7 @@ extension System on BuildContext {
         content: Text(message),
         actions: [
           TextButton(
-            onPressed: () => Navigator.of(context).pop(),
+            onPressed: () => context.pop(),
             child: Text('OK'),
           ),
         ],
