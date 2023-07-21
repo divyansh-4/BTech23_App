@@ -1,31 +1,22 @@
-import 'package:btech_induction_2023/view/theme/colors.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 
-class InductionAppTheme {
+class InductionAppColor {
   static final dark = ThemeData(
-    colorScheme: ColorScheme.fromSwatch(
-        primarySwatch: InductionAppColor.deepPurple,
-        brightness: Brightness.dark),
-    appBarTheme: AppBarTheme(
-      color: InductionAppColor.deepPurple,
-      elevation: 0,
-      systemOverlayStyle: SystemUiOverlayStyle(
-        statusBarColor: InductionAppColor.deepPurple,
-        statusBarIconBrightness: Brightness.light,
-      ),
+    colorScheme: ColorScheme.fromSwatch(primarySwatch: Colors.deepPurple),
+    appBarTheme: const AppBarTheme(
+      color: Colors.deepPurple,
     ),
-    primaryColor: InductionAppColor.deepPurple,
+    primaryColor: Colors.deepPurple,
     hintColor: Colors.deepPurpleAccent,
-    primaryColorDark: InductionAppColor.deepPurple[700],
-    primaryColorLight: InductionAppColor.deepPurple[200],
+    primaryColorDark: Colors.deepPurple[700],
+    primaryColorLight: Colors.deepPurple[200],
     canvasColor: Colors.white,
-    scaffoldBackgroundColor: InductionAppColor.deepPurple,
+    scaffoldBackgroundColor: Colors.white,
     textTheme: const TextTheme(
       bodyMedium: TextStyle(color: Colors.black),
     ),
     brightness: Brightness.dark,
-    primarySwatch: InductionAppColor.deepPurple,
+    primarySwatch: Colors.deepPurple,
     dividerTheme: const DividerThemeData(thickness: 0.8),
     chipTheme: const ChipThemeData(
       padding: EdgeInsets.zero,

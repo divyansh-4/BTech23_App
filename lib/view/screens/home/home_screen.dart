@@ -1,5 +1,3 @@
-import 'package:btech_induction_2023/extensions/system.dart';import 'package:btech_induction_2023/view/widgets/header.dart';
-import 'package:btech_induction_2023/view/widgets/texture_background.dart';
 import 'package:flutter/material.dart';
 
 class InductionAppHomePage extends StatefulWidget {
@@ -14,14 +12,17 @@ class InductionAppHomePage extends StatefulWidget {
 class _InductionAppHomePageState extends State<InductionAppHomePage> {
   @override
   Widget build(BuildContext context) {
-    return const Scaffold(
-        body: SafeArea(
-      child: Stack(
-        children: [
-          TextureBackground(),
-          BackgroundHeader(),
-        ],
+    return Scaffold(
+      appBar: AppBar(
+        title: Text(widget.title),
       ),
-    ));
+      //drawer: buildSidebar(),
+      body: const Center(
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: <Widget>[],
+        ),
+      ),
+    );
   }
 }

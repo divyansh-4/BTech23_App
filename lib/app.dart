@@ -8,9 +8,8 @@ class InductionApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      debugShowCheckedModeBanner: false,
       title: 'B.Tech Induction App',
-      theme: InductionAppTheme.dark,
+      theme: InductionAppColor.dark,
       home: const InductionAppHomePage(title: 'IIIT-D Induction App'),
     );
   }
