@@ -1,0 +1,12 @@
+import 'package:btech_induction_2023/extensions/theme.dart';
+import 'package:flutter/material.dart';
+
+class InductionAppColor {
+  static MaterialColor deepPurple = const Color(0xFF4D2885).material();
+  static MaterialColor yellow = const Color(0xFFFAC018).material();
+  static MaterialColor red = const Color(0xFFE44F44).material();
+  static MaterialColor green = const Color(0xFF32BD6C).material();
+  static MaterialColor blue = const Color(0xFF277FE6).material();
+  static MaterialColor grey = const Color(0xFFD9D9D9).material();
+  static MaterialColor darkGrey = const Color(0xFF424242).material();
+}
