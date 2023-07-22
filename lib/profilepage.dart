@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:image_picker/image_picker.dart';
 import 'dart:io';
 import 'main.dart';
@@ -37,11 +38,6 @@ class _ProfilePageState extends State<ProfilePage> {
         _fullName!.isNotEmpty &&
         _pronouns != null &&
         _pronouns!.isNotEmpty) {
-      print('Username: $_username');
-      print('Full Name: $_fullName');
-      print('Pronouns: $_pronouns');
-      print('Profile Image Path: ${_profileImage!.path}');
-
       Navigator.push(
         context,
         MaterialPageRoute(
@@ -55,7 +51,7 @@ class _ProfilePageState extends State<ProfilePage> {
       );
     } else {
       ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(
+        const SnackBar(
           content: Text('Please fill in all the fields and upload a picture.'),
         ),
       );
@@ -71,13 +67,13 @@ class _ProfilePageState extends State<ProfilePage> {
         elevation: 0,
       ),
       extendBodyBehindAppBar: true,
-      drawer: SideBarDrawer(),
+      drawer: const SideBarDrawer(),
       body: Stack(
         children: [
           Positioned.fill(
             child: Image.asset(
               'images/base.jpg',
-              fit: BoxFit.fill,
+              fit: BoxFit.cover,
             ),
           ),
           Center(
@@ -91,7 +87,7 @@ class _ProfilePageState extends State<ProfilePage> {
                         423, // Set the desired height for the background image
                     width:
                         340, // Set the desired width for the background image
-                    decoration: BoxDecoration(
+                    decoration: const BoxDecoration(
                       image: DecorationImage(
                         image: AssetImage(
                             'images/profilepagebase.png'), // Provide the path to your "profilepagebase.png" image
@@ -111,13 +107,13 @@ class _ProfilePageState extends State<ProfilePage> {
                           onPressed: () {
                             _pickImage(ImageSource.gallery);
                           },
-                          child: Text('Upload Picture'),
                           style: ElevatedButton.styleFrom(
-                            backgroundColor: Color(
+                            backgroundColor: const Color(
                                 0xFFFAC018), // Set the background color to #FAC018
                           ),
+                          child: const Text('Upload Picture'),
                         ),
-                        SizedBox(height: 20),
+                        const SizedBox(height: 20),
                         TextFormField(
                           onChanged: (value) {
                             setState(() {
@@ -125,17 +121,29 @@ class _ProfilePageState extends State<ProfilePage> {
                             });
                           },
                           textAlign: TextAlign.center,
-                          decoration: InputDecoration(
+                          decoration: const InputDecoration(
                             labelText: 'My name is',
                             hintText: 'Full Name',
                             labelStyle: TextStyle(
-                                fontWeight:
-                                    FontWeight.bold), // Set labelText to bold
+                              fontWeight: FontWeight.bold,
+                              fontSize: 20,
+                            ), // Set labelText font size and bold
+                            hintStyle: TextStyle(
+                              fontSize: 16,
+                            ), // Set hintText font size
                             border:
                                 UnderlineInputBorder(), // Set border to UnderlineInputBorder
+                            contentPadding: EdgeInsets.symmetric(
+                                horizontal: 16), // Adjust content padding
                           ),
+                          inputFormatters: [
+                            FilteringTextInputFormatter
+                                .singleLineFormatter, // To prevent multiline input
+                          ],
+                          textAlignVertical: TextAlignVertical
+                              .center, // Center vertically inside TextFormField
                         ),
-                        SizedBox(height: 20),
+                        const SizedBox(height: 20),
                         TextFormField(
                           onChanged: (value) {
                             setState(() {
@@ -143,17 +151,29 @@ class _ProfilePageState extends State<ProfilePage> {
                             });
                           },
                           textAlign: TextAlign.center,
-                          decoration: InputDecoration(
+                          decoration: const InputDecoration(
                             labelText: 'Refer to me as...',
                             hintText: 'Pronouns',
                             labelStyle: TextStyle(
-                                fontWeight:
-                                    FontWeight.bold), // Set labelText to bold
+                              fontWeight: FontWeight.bold,
+                              fontSize: 20,
+                            ), // Set labelText font size and bold
+                            hintStyle: TextStyle(
+                              fontSize: 16,
+                            ), // Set hintText font size
                             border:
                                 UnderlineInputBorder(), // Set border to UnderlineInputBorder
+                            contentPadding: EdgeInsets.symmetric(
+                                horizontal: 16), // Adjust content padding
                           ),
+                          inputFormatters: [
+                            FilteringTextInputFormatter
+                                .singleLineFormatter, // To prevent multiline input
+                          ],
+                          textAlignVertical: TextAlignVertical
+                              .center, // Center vertically inside TextFormField
                         ),
-                        SizedBox(height: 20),
+                        const SizedBox(height: 20),
                         TextFormField(
                           onChanged: (value) {
                             setState(() {
@@ -161,26 +181,38 @@ class _ProfilePageState extends State<ProfilePage> {
                             });
                           },
                           textAlign: TextAlign.center,
-                          decoration: InputDecoration(
+                          decoration: const InputDecoration(
                             labelText: 'and I like to go by',
                             hintText: 'Username',
                             labelStyle: TextStyle(
-                                fontWeight:
-                                    FontWeight.bold), // Set labelText to bold
+                              fontWeight: FontWeight.bold,
+                              fontSize: 20,
+                            ), // Set labelText font size and bold
+                            hintStyle: TextStyle(
+                              fontSize: 16,
+                            ), // Set hintText font size
                             border:
                                 UnderlineInputBorder(), // Set border to UnderlineInputBorder
+                            contentPadding: EdgeInsets.symmetric(
+                                horizontal: 16), // Adjust content padding
                           ),
+                          inputFormatters: [
+                            FilteringTextInputFormatter
+                                .singleLineFormatter, // To prevent multiline input
+                          ],
+                          textAlignVertical: TextAlignVertical
+                              .center, // Center vertically inside TextFormField
                         ),
-                        SizedBox(height: 20),
+                        const SizedBox(height: 20),
                         ElevatedButton(
                           onPressed: () {
                             _saveProfile(context);
                           },
-                          child: Text('Save and Move to Home Page'),
                           style: ElevatedButton.styleFrom(
-                            backgroundColor: Color(
+                            backgroundColor: const Color(
                                 0xFFFAC018), // Set the background color to #FAC018
                           ),
+                          child: const Text('Save and Move to Home Page'),
                         ),
                       ],
                     ),
@@ -196,6 +228,8 @@ class _ProfilePageState extends State<ProfilePage> {
 }
 
 class SideBarDrawer extends StatelessWidget {
+  const SideBarDrawer({super.key});
+
   @override
   Widget build(BuildContext context) {
     return Drawer(
@@ -221,7 +255,7 @@ class SideBarDrawer extends StatelessWidget {
               Navigator.pop(context);
               Navigator.push(
                 context,
-                MaterialPageRoute(builder: (context) => MyHomePage()),
+                MaterialPageRoute(builder: (context) => const MyHomePage()),
               );
             },
           ),

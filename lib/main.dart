@@ -2,10 +2,12 @@ import 'package:flutter/material.dart';
 import 'package:btech_induction_2023/profilepage.dart';
 
 void main() {
-  runApp(MyApp());
+  runApp(const MyApp());
 }
 
 class MyApp extends StatelessWidget {
+  const MyApp({super.key});
+
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
@@ -14,12 +16,14 @@ class MyApp extends StatelessWidget {
         primaryColor: Colors.deepPurple,
         scaffoldBackgroundColor: Colors.grey[900],
       ),
-      home: MyHomePage(),
+      home: const MyHomePage(),
     );
   }
 }
 
 class MyHomePage extends StatelessWidget {
+  const MyHomePage({super.key});
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -29,7 +33,7 @@ class MyHomePage extends StatelessWidget {
         elevation: 0,
       ),
       extendBodyBehindAppBar: true,
-      drawer: SideBarDrawer(),
+      drawer: const SideBarDrawer(),
       body: SafeArea(
         child: Stack(
           children: [
@@ -43,19 +47,20 @@ class MyHomePage extends StatelessWidget {
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: <Widget>[
-                  Text(
+                  const Text(
                     'Welcome to IIIT-D Induction App!',
                     style: TextStyle(fontSize: 24),
                   ),
-                  SizedBox(height: 20),
+                  const SizedBox(height: 20),
                   ElevatedButton(
                     onPressed: () {
                       Navigator.push(
                         context,
-                        MaterialPageRoute(builder: (context) => ProfilePage()),
+                        MaterialPageRoute(
+                            builder: (context) => const ProfilePage()),
                       );
                     },
-                    child: Text('Go to Profile Page'),
+                    child: const Text('Go to Profile Page'),
                   ),
                 ],
               ),
