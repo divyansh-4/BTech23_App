@@ -1,3 +1,5 @@
+import 'package:btech_induction_2023/clubs.dart';
+import 'package:btech_induction_2023/openingScreen.dart';
 import 'package:flutter/material.dart';
 
 void main() {
@@ -16,7 +18,7 @@ class MyApp extends StatelessWidget {
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
         useMaterial3: true,
       ),
-      home: const MyHomePage(title: 'IIIT-D Induction App'),
+      home: clubs(),
     );
   }
 }
