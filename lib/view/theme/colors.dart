@@ -8,5 +8,5 @@ class InductionAppColor {
   static MaterialColor green = const Color(0xFF32BD6C).material();
   static MaterialColor blue = const Color(0xFF277FE6).material();
   static MaterialColor grey = const Color(0xFFD9D9D9).material();
-  static MaterialColor darkGrey = const Color(0xFF424242).material();
+  static Color darkGrey = const Color(0xFF252525);
 }
