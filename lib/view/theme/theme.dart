@@ -5,22 +5,21 @@ import 'package:flutter/services.dart';
 class InductionAppTheme {
   static final dark = ThemeData(
     colorScheme: ColorScheme.fromSwatch(
-        primarySwatch: InductionAppColor.deepPurple,
-        brightness: Brightness.dark),
+        primarySwatch: InductionAppColor.red, brightness: Brightness.dark),
     appBarTheme: AppBarTheme(
-      color: InductionAppColor.deepPurple,
       elevation: 0,
+      color: Colors.transparent,
       systemOverlayStyle: SystemUiOverlayStyle(
-        statusBarColor: InductionAppColor.deepPurple,
+        statusBarColor: InductionAppColor.red,
         statusBarIconBrightness: Brightness.light,
       ),
     ),
-    primaryColor: InductionAppColor.deepPurple,
+    primaryColor: InductionAppColor.yellow,
     hintColor: Colors.deepPurpleAccent,
     primaryColorDark: InductionAppColor.deepPurple[700],
     primaryColorLight: InductionAppColor.deepPurple[200],
     canvasColor: Colors.white,
-    scaffoldBackgroundColor: InductionAppColor.deepPurple,
+    scaffoldBackgroundColor: InductionAppColor.red,
     textTheme: const TextTheme(
       bodyMedium: TextStyle(color: Colors.black),
     ),

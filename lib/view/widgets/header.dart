@@ -18,7 +18,7 @@ class BackgroundHeader extends StatelessWidget {
           ),
           Container(
             decoration: const BoxDecoration(
-              image:   DecorationImage(
+              image: DecorationImage(
                 image: AssetImage('images/bg_texture.png'),
                 fit: BoxFit.cover,
               ),
@@ -28,7 +28,6 @@ class BackgroundHeader extends StatelessWidget {
             alignment: Alignment.center,
             child: Image.asset("images/induction_logo.png"),
           ),
-         
         ],
       ),
     );
