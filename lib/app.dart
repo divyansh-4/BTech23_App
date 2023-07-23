@@ -11,7 +11,7 @@ class InductionApp extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       title: 'B.Tech Induction App',
       theme: InductionAppTheme.dark,
-      home: const InductionAppHomePage(title: 'IIIT-D Induction App'),
+      home: const InductionAppHomePage(),
     );
   }
 }
