@@ -35,9 +35,8 @@ class _InductionAppHomePageState extends State<InductionAppHomePage> {
                           child: Image.asset("images/iiitd.png", height: 200),
                         ),
                         centerTitle: true,
-                        leading: InkResponse(
-                          onTap: (){},
-                          child: const MenuIcon()),
+                        leading:
+                            InkResponse(onTap: () {}, child: const MenuIcon()),
                         actions: [
                           IconButton(
                               onPressed: () {},
