@@ -222,7 +222,6 @@ class ClubsScreen extends StatelessWidget {
 
   var desc = [];
 
-  var imgPath = [];
 
   var heading = [
     'DesignHub',
