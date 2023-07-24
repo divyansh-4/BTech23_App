@@ -140,7 +140,7 @@ class _CreateProfileScreenState extends State<CreateProfileScreen> {
                                 UnderlineInputBorder(), // Set border to UnderlineInputBorder
                           ),
                         ),
-                        SizedBox(height: 20),
+                        const SizedBox(height: 20),
                         TextFormField(
                           onChanged: (value) {
                             setState(() {
