@@ -220,7 +220,6 @@ class ClubsScreen extends StatelessWidget {
         '')
   ];
 
-  var desc = [];
 
 
   var heading = [
