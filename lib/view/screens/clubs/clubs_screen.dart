@@ -220,8 +220,6 @@ class ClubsScreen extends StatelessWidget {
         '')
   ];
 
-
-
   var heading = [
     'DesignHub',
     'Astronuts',
