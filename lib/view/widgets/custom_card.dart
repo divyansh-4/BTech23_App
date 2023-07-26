@@ -1,3 +1,4 @@
+import 'package:btech_induction_2023/extensions/system.dart';
 import 'package:btech_induction_2023/view/theme/colors.dart';
 import 'package:flutter/material.dart';
 
@@ -9,7 +10,7 @@ class CascadeCard extends StatelessWidget {
   Widget build(BuildContext context) {
     return SizedBox(
         width: 310,
-        height: 345,
+        height: context.height * .7,
         child: Stack(
           children: [
             Positioned(
@@ -17,7 +18,7 @@ class CascadeCard extends StatelessWidget {
               top: 13,
               child: Container(
                 width: 301,
-                height: 320,
+                height: 397,
                 decoration: ShapeDecoration(
                   color: InductionAppColor.yellow,
                   shape: RoundedRectangleBorder(
@@ -31,7 +32,7 @@ class CascadeCard extends StatelessWidget {
               top: 13,
               child: Container(
                 width: 301,
-                height: 320,
+                height: 397,
                 child: Image.asset(
                   "images/bg_texture.png",
                   fit: BoxFit.cover,
@@ -43,7 +44,7 @@ class CascadeCard extends StatelessWidget {
               top: 1,
               child: Container(
                 width: 301,
-                height: 321,
+                height: 398,
                 padding: const EdgeInsets.all(10),
                 decoration: ShapeDecoration(
                   color: const Color(0xFF252525),
