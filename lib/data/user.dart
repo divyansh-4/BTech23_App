@@ -18,7 +18,7 @@ class UserProfile {
       username: json["username"],
       profileImage: json["imageUrl"],
       pronouns: json["pronouns"],
-      points: 100,
+      points: 0,
     );
   }
 

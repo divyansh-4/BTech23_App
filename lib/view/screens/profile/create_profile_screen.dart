@@ -45,7 +45,7 @@ class _CreateProfileScreenState extends State<CreateProfileScreen> {
         pronouns: pronounsTextEditingController.text,
         username: usernameTextEditingController.text,
         profileImage: _profileImage!.path,
-        points: 100,
+        points: 0,
       );
 
       // update firebase
