@@ -58,7 +58,9 @@ class ClubsScreen extends StatelessWidget {
                                 color: InductionAppColor.darkGrey)),
                       ),
                       child: ListView.builder(
+
                         itemBuilder: (context, index) {
+
                           return ClubCard(club: Club.dummyClubs()[index]);
                         },
                         itemCount: Club.dummyClubs().length,
