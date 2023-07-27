@@ -50,10 +50,12 @@ class ClubsScreen extends StatelessWidget {
                         child: Container(
                       padding: const EdgeInsets.only(top: 10),
                       decoration: ShapeDecoration(
-                        color: InductionAppColor.grey,
+                        color: InductionAppColor.green,
                         shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(10),
-                        ),
+                            borderRadius: BorderRadius.circular(10),
+                            side: BorderSide(
+                                width: 0.50,
+                                color: InductionAppColor.darkGrey)),
                       ),
                       child: ListView.builder(
                         itemBuilder: (context, index) {

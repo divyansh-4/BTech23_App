@@ -4,8 +4,8 @@ import 'package:flutter/material.dart';
 
 class ClubCard extends StatelessWidget {
   const ClubCard({super.key, required this.club});
-  final Club club;
 
+  final Club club;
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -23,7 +23,7 @@ class ClubCard extends StatelessWidget {
                   height: 90,
                   width: 90,
                   child: Image.asset(
-                    "images/iiitd.png",
+                    'images/${club.imagePath}',
                     height: 80,
                     width: 80,
                   ),
@@ -49,13 +49,13 @@ class ClubCard extends StatelessWidget {
                 children: [
                   Align(
                     alignment: Alignment.topLeft,
-                    child: Text(club.name,
-                        style: const TextStyle(
+                    child: Text(
+                      club.name,
+                      style: const TextStyle(
+                          fontSize: 30,
                           color: Colors.white,
-                          fontSize: 18,
-                          fontFamily: 'Netflix Sans ',
-                          fontWeight: FontWeight.w700,
-                        )),
+                          fontWeight: FontWeight.bold),
+                    ),
                   ),
                   const SizedBox(
                     height: 5,
@@ -63,14 +63,14 @@ class ClubCard extends StatelessWidget {
                   // Add some spacing between the texts
                   Expanded(
                     // Use Expanded for multi-line wrapping
-                    child: Text(club.description,
-                        style: const TextStyle(
-                          color: Colors.white,
-                          fontSize: 12,
-                          fontFamily: 'Netflix Sans ',
-                          fontWeight: FontWeight.w700,
-                          letterSpacing: -0.46,
-                        )),
+                    child: SingleChildScrollView(
+                      // Wrap with SingleChildScrollView to handle vertical overflow
+                      child: Text(
+                        club.description,
+                        style:
+                            const TextStyle(fontSize: 20, color: Colors.white),
+                      ),
+                    ),
                   ),
                 ],
               ),

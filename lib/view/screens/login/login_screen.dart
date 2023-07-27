@@ -1,5 +1,6 @@
 import 'package:btech_induction_2023/extensions/navigation.dart';
 import 'package:btech_induction_2023/view/screens/home/home_screen.dart';
+import 'package:btech_induction_2023/view/screens/profile/create_profile_screen.dart';
 import 'package:btech_induction_2023/view/theme/colors.dart';
 import 'package:btech_induction_2023/view/widgets/texture_background.dart';
 import 'package:flutter/material.dart';
@@ -28,7 +29,7 @@ class LoginScreen extends StatelessWidget {
                   MaterialButton(
                       color: InductionAppColor.yellow,
                       onPressed: () =>
-                          context.push(const InductionAppHomePage()),
+                          context.push(const CreateProfileScreen()),
                       child: const Row(
                         mainAxisSize: MainAxisSize.min,
                         children: [
