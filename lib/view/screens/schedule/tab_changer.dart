@@ -2,16 +2,19 @@ import 'package:btech_induction_2023/view/theme/colors.dart';
 import 'package:btech_induction_2023/view/widgets/constants.dart';
 import 'package:flutter/material.dart';
 
-class TabChanger extends StatefulWidget {
-  const TabChanger({super.key, required this.pageController});
+class TabChanger extends StatelessWidget {
+  const TabChanger(
+      {super.key,
+      required this.pageController,
+      required this.selectedDay,
+      this.onNext,
+      this.onPrevious});
 
   final PageController pageController;
-  @override
-  State<TabChanger> createState() => _TabChangerState();
-}
 
-class _TabChangerState extends State<TabChanger> {
-  List<String> days = ["Day 1", "Day 2", "Day 3", "Day 4", "Day 5"];
+  final int selectedDay;
+  final Function()? onNext;
+  final Function()? onPrevious;
 
   @override
   Widget build(BuildContext context) {
@@ -22,7 +25,7 @@ class _TabChangerState extends State<TabChanger> {
           width: 40,
           height: 40,
           child: MaterialButton(
-            onPressed: () {},
+            onPressed: onPrevious,
             color: InductionAppColor.yellow,
             shape: OvalBorder(
               side: borderSide,
@@ -43,9 +46,9 @@ class _TabChangerState extends State<TabChanger> {
               borderRadius: BorderRadius.circular(9.08),
             ),
           ),
-          child: const Text(
-            'DAY 1',
-            style: TextStyle(
+          child: Text(
+            "Day $selectedDay",
+            style: const TextStyle(
               color: Colors.black,
               fontSize: 32,
               fontFamily: 'Netflix Sans ',
@@ -59,7 +62,7 @@ class _TabChangerState extends State<TabChanger> {
           width: 40,
           height: 40,
           child: MaterialButton(
-            onPressed: () {},
+            onPressed: onNext,
             color: InductionAppColor.yellow,
             shape: OvalBorder(
               side: borderSide,

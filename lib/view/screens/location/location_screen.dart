@@ -1,8 +1,8 @@
 import 'package:btech_induction_2023/data/event.dart';
 import 'package:btech_induction_2023/extensions/navigation.dart';
-import 'package:btech_induction_2023/view/screens/home/event_tile.dart';
 import 'package:btech_induction_2023/view/theme/colors.dart';
 import 'package:btech_induction_2023/view/widgets/headline.dart';
+import 'package:btech_induction_2023/view/widgets/menu.dart';
 import 'package:btech_induction_2023/view/widgets/menu_icon.dart';
 import 'package:btech_induction_2023/view/widgets/stepper.dart';
 import 'package:btech_induction_2023/view/widgets/texture_background.dart';
@@ -35,8 +35,11 @@ class _LocationScreenState extends State<LocationScreen> {
                           child: Image.asset("images/iiitd.png", height: 200),
                         ),
                         centerTitle: true,
-                        leading:
-                            InkResponse(onTap: () {}, child: const MenuIcon()),
+                        leading: InkResponse(
+                            onTap: () => context.pushReplacement(
+                                  const InductionAppMenu(),
+                                ),
+                            child: const MenuIcon()),
                         actions: const [
                           SizedBox(
                             width: 50,

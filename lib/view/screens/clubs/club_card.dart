@@ -49,13 +49,13 @@ class ClubCard extends StatelessWidget {
                 children: [
                   Align(
                     alignment: Alignment.topLeft,
-                    child: Text(
-                      club.name,
-                      style: const TextStyle(
-                          fontSize: 30,
+                    child: Text(club.name,
+                        style: const TextStyle(
                           color: Colors.white,
-                          fontWeight: FontWeight.bold),
-                    ),
+                          fontSize: 18,
+                          fontFamily: 'Netflix Sans ',
+                          fontWeight: FontWeight.w700,
+                        )),
                   ),
                   const SizedBox(
                     height: 5,
@@ -63,10 +63,14 @@ class ClubCard extends StatelessWidget {
                   // Add some spacing between the texts
                   Expanded(
                     // Use Expanded for multi-line wrapping
-                    child: Text(
-                      club.description,
-                      style: const TextStyle(fontSize: 20, color: Colors.white),
-                    ),
+                    child: Text(club.description,
+                        style: const TextStyle(
+                          color: Colors.white,
+                          fontSize: 12,
+                          fontFamily: 'Netflix Sans ',
+                          fontWeight: FontWeight.w700,
+                          letterSpacing: -0.46,
+                        )),
                   ),
                 ],
               ),
