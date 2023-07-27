@@ -36,94 +36,80 @@ class _ScheduleScreenState extends State<ScheduleScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: SafeArea(
-        child: Stack(
-          children: [
-            const TextureBackground(),
-            Align(
-              alignment: Alignment.center,
-              child: NestedScrollView(
+        body: SafeArea(
+      child: Stack(
+        children: [
+          const TextureBackground(),
+          Align(
+            alignment: Alignment.center,
+            child: NestedScrollView(
                 floatHeaderSlivers: true,
                 headerSliverBuilder: (context, innerBoxIsScrolled) => [
-                  SliverAppBar(
-                    forceElevated: innerBoxIsScrolled,
-                    title: SizedBox(
-                      child: Image.asset("images/iiitd.png", height: 200),
-                    ),
-                    centerTitle: true,
-                    leading: InkResponse(
-                      onTap: () =>
-                          context.pushReplacement(const InductionAppMenu()),
-                      child: const MenuIcon(),
-                    ),
-                    actions: const [
-                      SizedBox(
-                        width: 50,
+                      SliverAppBar(
+                        forceElevated: innerBoxIsScrolled,
+                        title: SizedBox(
+                          child: Image.asset("images/iiitd.png", height: 200),
+                        ),
+                        centerTitle: true,
+                        leading: InkResponse(
+                            onTap: () => context.pushReplacement(
+                                  const InductionAppMenu(),
+                                ),
+                            child: const MenuIcon()),
+                        actions: const [
+                          SizedBox(
+                            width: 50,
+                          ),
+                        ],
+                      )
+                    ],
+                body: SafeArea(
+                    child: Padding(
+                  padding: const EdgeInsets.all(16),
+                  child: Column(
+                    children: [
+                      const HeadlineText(text: "schedule"),
+                      const SizedBox(height: 10),
+                      TabChanger(
+                        pageController: pageController,
+                        selectedDay: currentDay + 1,
+                        onNext: () {
+                          if (currentDay < 2) {
+                            pageController.animateToPage(currentDay + 1,
+                                duration: const Duration(milliseconds: 300),
+                                curve: Curves.easeIn);
+                          }
+                        },
+                        onPrevious: () {
+                          if (currentDay > 0) {
+                            pageController.animateToPage(currentDay - 1,
+                                duration: const Duration(milliseconds: 300),
+                                curve: Curves.easeIn);
+                          }
+                        },
                       ),
+                      const SizedBox(height: 15),
+                      Expanded(
+                          child: PageView(
+                        controller: pageController,
+                        children: [
+                          PageSchedule(
+                              schedules: dayOneSchedule,
+                              date: 'Wednesday, 2nd August'),
+                          PageSchedule(
+                              schedules: dayOneSchedule,
+                              date: 'Thursday, 3rd August'),
+                          PageSchedule(
+                              schedules: dayOneSchedule,
+                              date: 'Friday, 4th August'),
+                        ],
+                      ))
                     ],
                   ),
-                ],
-                body: SafeArea(
-                  child: Padding(
-                    padding: const EdgeInsets.all(16),
-                    child: Column(
-                      children: [
-                        const HeadlineText(text: "schedule"),
-                        const SizedBox(height: 10),
-                        TabChanger(
-                          pageController: pageController,
-                          selectedDay: currentDay + 1,
-                          onNext: () {
-                            if (currentDay < 4) {
-                              pageController.animateToPage(
-                                currentDay + 1,
-                                duration: const Duration(milliseconds: 300),
-                                curve: Curves.easeIn,
-                              );
-                            }
-                          },
-                          onPrevious: () {
-                            if (currentDay > 0) {
-                              pageController.animateToPage(
-                                currentDay - 1,
-                                duration: const Duration(milliseconds: 300),
-                                curve: Curves.easeIn,
-                              );
-                            }
-                          },
-                        ),
-                        const SizedBox(height: 15),
-                        Expanded(
-                          child: PageView(
-                            controller: pageController,
-                            children: [
-                              PageSchedule(
-                                  schedules: dayOneSchedule,
-                                  date: 'Wednesday, 2nd August'),
-                              PageSchedule(
-                                  schedules: dayTwoSchedule,
-                                  date: 'Thursday, 3rd August'),
-                              PageSchedule(
-                                  schedules: dayThreeSchedule,
-                                  date: 'Friday, 4th August'),
-                              PageSchedule(
-                                  schedules: dayFourSchedule,
-                                  date: 'Saturday, 5th August'),
-                              PageSchedule(
-                                  schedules: dayFiveSchedule,
-                                  date: 'Sunday, 6th August'),
-                            ],
-                          ),
-                        ),
-                      ],
-                    ),
-                  ),
-                ),
-              ),
-            ),
-          ],
-        ),
+                ))),
+          ),
+        ],
       ),
-    );
+    ));
   }
 }
