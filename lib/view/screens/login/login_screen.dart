@@ -1,4 +1,3 @@
-import 'package:btech_induction_2023/data/user.dart';
 import 'package:btech_induction_2023/extensions/navigation.dart';
 import 'package:btech_induction_2023/service/firebase.dart';
 import 'package:btech_induction_2023/view/screens/home/home_screen.dart';
@@ -26,25 +25,15 @@ class _LoginScreenState extends State<LoginScreen> {
             .getUserData()
             .then((value) {
           if (value == null) {
-            context.push(CreateProfileScreen(
-                currentUser: UserProfile.fromAuthUser(user)));
+            if (mounted) {
+              context.pushAndRemoveUntil(const CreateProfileScreen());
+            }
           } else {
             if (mounted) {
               context.pushReplacement(const InductionAppHomePage());
             }
           }
         });
-
-        // if (user.metadata == DateTime.now()) {
-        //   context.push(const CreateProfileScreen());
-        // } else {
-        //   if (mounted) {
-        //     final userProfile = UserProfile.fromAuthUser(user);
-        //     Provider.of<FirebaseFirestoreService>(context, listen: false)
-        //         .addUserData(userProfile);
-        //     context.pushReplacement(const InductionAppHomePage());
-        //   }
-        // }
       }
     });
   }
@@ -57,6 +46,9 @@ class _LoginScreenState extends State<LoginScreen> {
           child: Image.asset("images/iiitd.png", height: 200),
         ),
         centerTitle: true,
+        leading: const SizedBox(
+            width: 50,
+          ),
         actions: const [
           SizedBox(
             width: 50,

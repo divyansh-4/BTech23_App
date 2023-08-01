@@ -26,7 +26,7 @@ class _InductionAppMenuState extends State<InductionAppMenu> {
     FirebaseAuth.instance.authStateChanges().listen((user) {
       if (user == null) {
         if (mounted) {
-          context.pushReplacement(const LoginScreen());
+          context.pushAndRemoveUntil(const LoginScreen());
         }
       }
     });
@@ -34,9 +34,9 @@ class _InductionAppMenuState extends State<InductionAppMenu> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
+    return Drawer(
       backgroundColor: InductionAppColor.yellow,
-      body: SafeArea(
+      child: SafeArea(
           child: Stack(
         children: [
           const TextureBackground(),

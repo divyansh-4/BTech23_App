@@ -1,5 +1,6 @@
 import 'dart:io';
 
+import 'package:btech_induction_2023/data/schedule.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_storage/firebase_storage.dart';
@@ -79,6 +80,16 @@ class FirebaseFirestoreService extends ChangeNotifier {
       }
     } catch (exception) {
       return null;
+    }
+  }
+
+  Future<Schedule> getScheduledEvents(String day) async {
+    try {
+      final doc = await _firestore.collection("schedules").doc(day).get();
+
+      return Schedule.fromJson(doc.data() as Map<String, dynamic>);
+    } catch (exception) {
+      rethrow;
     }
   }
 }

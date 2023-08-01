@@ -1,3 +1,4 @@
+import 'package:btech_induction_2023/data/step_info.dart';
 import 'package:btech_induction_2023/extensions/system.dart';
 import 'package:btech_induction_2023/view/theme/colors.dart';
 import 'package:btech_induction_2023/view/widgets/constants.dart';
@@ -33,7 +34,7 @@ class InfoStepper extends StatelessWidget {
                                 steps[index].time!,
                                 style: const TextStyle(
                                   color: Colors.white,
-                                  fontSize: 14,
+                                  fontSize: 12,
                                   fontFamily: 'Netflix Sans ',
                                   fontWeight: FontWeight.w700,
                                   letterSpacing: -0.56,
@@ -58,23 +59,26 @@ class InfoStepper extends StatelessWidget {
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         const SizedBox(height: 7),
-                        Text(
-                          steps[index].title,
-                          style: const TextStyle(
-                            color: Colors.white,
-                            fontSize: 18,
-                            fontFamily: 'Netflix Sans ',
-                            fontWeight: FontWeight.w700,
+                        SizedBox(
+                          width: context.width * 0.46,
+                          child: Text(
+                            steps[index].title,
+                            style: const TextStyle(
+                              color: Colors.white,
+                              fontSize: 18,
+                              fontFamily: 'Netflix Sans ',
+                              fontWeight: FontWeight.w700,
+                            ),
                           ),
                         ),
                         const SizedBox(height: 5),
                         SizedBox(
-                          width: context.width * 0.55,
+                          width: context.width * 0.46,
                           child: Text(steps[index].contents,
                               overflow: TextOverflow.clip,
                               style: const TextStyle(
                                 color: Colors.white,
-                                fontSize: 12,
+                                fontSize: 11,
                                 fontFamily: 'Netflix Sans ',
                                 fontWeight: FontWeight.w700,
                                 letterSpacing: -0.46,
@@ -101,17 +105,5 @@ class InfoStepper extends StatelessWidget {
         )
       ],
     );
-  }
-}
-
-class InfoStep {
-  final String title;
-  final String contents;
-  final String? time;
-  const InfoStep({required this.title, required this.contents, this.time});
-
-  factory InfoStep.fromJson(Map<String, dynamic> json) {
-    return InfoStep(
-        title: json['title'], contents: json['contents'], time: json['time']);
   }
 }

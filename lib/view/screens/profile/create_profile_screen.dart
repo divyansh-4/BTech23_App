@@ -50,6 +50,7 @@ class _CreateProfileScreenState extends State<CreateProfileScreen> {
       nameTextEditingController.text = widget.currentUser!.fullName;
       phoneTextEditingController.text = widget.currentUser!.phone ?? "";
       usernameTextEditingController.text = widget.currentUser!.username;
+      _userProfileImageURL = widget.currentUser!.profileImage;
     }
   }
 
@@ -114,20 +115,28 @@ class _CreateProfileScreenState extends State<CreateProfileScreen> {
                             right: 0,
                             bottom: 0,
                             child: const CascadeCard(child: SizedBox())),
-
                         Positioned(
-                        left: 0,
-                        right: 0,
-                        top: 80,
-                        child:   _profileImage != null ?
-                                  CircleAvatar(
-                                    radius: 50,
-                                    backgroundImage: FileImage(_profileImage!),
-                                  ) : const CircleAvatar(
-                                    radius: 50,
-                                   child: Icon(Icons.person),
+                            left: 0,
+                            right: 0,
+                            top: 80,
+                            child: _userProfileImageURL != null
+                                ? SizedBox(
+                                    child: CircleAvatar(
+                                      radius: 50,
+                                      child: ClipRRect(
+                                        borderRadius: BorderRadius.circular(50),
+                                        child: Image.network(
+                                          _userProfileImageURL!,
+                                          fit: BoxFit.fill,
+                                          width: 100,
+                                        ),
+                                      ),
+                                    ),
                                   )
-                        ),
+                                : const CircleAvatar(
+                                    radius: 50,
+                                    child: Icon(Icons.person),
+                                  )),
                         Align(
                           alignment: Alignment.center,
                           child: Form(
@@ -135,7 +144,6 @@ class _CreateProfileScreenState extends State<CreateProfileScreen> {
                             child: Column(
                               mainAxisAlignment: MainAxisAlignment.center,
                               children: <Widget>[
-                              
                                 ElevatedButton(
                                   onPressed: () {
                                     _pickImage(ImageSource.gallery)
@@ -180,21 +188,21 @@ class _CreateProfileScreenState extends State<CreateProfileScreen> {
                                         usernameTextEditingController,
                                     validationText:
                                         "Please enter your username"),
-
-                                         ElevatedButton(
-                    onPressed: () {
-                      if (formKey.currentState!.validate()) {
-                        _saveProfile(context);
-                      }
-                    },
-                    style: ElevatedButton.styleFrom(
-                      backgroundColor: InductionAppColor.yellow,
-                    ),
-                    child: const Text('Save Profile'),
-                  ),
-                  upLoaderState
-                      ? const CircularProgressIndicator()
-                      : const SizedBox.shrink(),
+                                !upLoaderState
+                                    ? ElevatedButton(
+                                        onPressed: () {
+                                          if (formKey.currentState!
+                                              .validate()) {
+                                            _saveProfile(context);
+                                          }
+                                        },
+                                        style: ElevatedButton.styleFrom(
+                                          backgroundColor:
+                                              InductionAppColor.yellow,
+                                        ),
+                                        child: const Text('Save Profile'),
+                                      )
+                                    : const CircularProgressIndicator(),
                               ],
                             ),
                           ),
@@ -202,7 +210,6 @@ class _CreateProfileScreenState extends State<CreateProfileScreen> {
                       ],
                     ),
                   ),
-                 
                 ],
               ),
             ),

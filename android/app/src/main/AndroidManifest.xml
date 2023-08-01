@@ -8,7 +8,7 @@
         </intent>
     </queries>
     <application
-            android:label="btech_induction_2023"
+            android:label="IIIT Delhi - Induction 2023"
             android:name="${applicationName}"
             android:icon="@mipmap/ic_launcher">
         <activity

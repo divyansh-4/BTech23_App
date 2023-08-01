@@ -1,3 +1,4 @@
+import 'package:btech_induction_2023/data/step_info.dart';
 import 'package:btech_induction_2023/view/theme/colors.dart';
 import 'package:btech_induction_2023/view/widgets/stepper.dart';
 import 'package:flutter/material.dart';
