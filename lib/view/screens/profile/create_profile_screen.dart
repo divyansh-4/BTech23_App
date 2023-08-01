@@ -9,8 +9,10 @@ import 'package:btech_induction_2023/view/screens/profile/text_form_field.dart';
 import 'package:btech_induction_2023/view/theme/colors.dart';
 import 'package:btech_induction_2023/view/widgets/custom_card.dart';
 import 'package:btech_induction_2023/view/widgets/texture_background.dart';
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
+import 'package:liquid_progress_indicator_v2/liquid_progress_indicator.dart';
 import 'package:provider/provider.dart';
 
 class CreateProfileScreen extends StatefulWidget {
@@ -124,13 +126,16 @@ class _CreateProfileScreenState extends State<CreateProfileScreen> {
                                     child: CircleAvatar(
                                       radius: 50,
                                       child: ClipRRect(
-                                        borderRadius: BorderRadius.circular(50),
-                                        child: Image.network(
-                                          _userProfileImageURL!,
-                                          fit: BoxFit.fill,
-                                          width: 100,
-                                        ),
-                                      ),
+                                          borderRadius:
+                                              BorderRadius.circular(50),
+                                          child: CachedNetworkImage(
+                                            imageUrl: _userProfileImageURL!,
+                                            fit: BoxFit.fill,
+                                            width: 100,
+                                            placeholder: (context, url) => Center(
+                                                child:
+                                                    LiquidCircularProgressIndicator()),
+                                          )),
                                     ),
                                   )
                                 : const CircleAvatar(

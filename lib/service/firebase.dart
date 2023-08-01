@@ -101,6 +101,7 @@ class FirebaseStorageService extends ChangeNotifier {
 
   Future<String> uploadProfilePicture(String filePath) async {
     try {
+      notifyListeners();
       _isUploading = true;
       notifyListeners();
       Reference reference = _firebaseStorage

@@ -66,26 +66,12 @@ class _LocationScreenState extends State<LocationScreen> {
                                             width: 0.50,
                                             color: InductionAppColor.darkGrey)),
                                   ),
-                                  child: Column(
+                                  child: const Column(
                                     crossAxisAlignment:
                                         CrossAxisAlignment.start,
                                     children: [
-                                      Flexible(
-                                          child: Container(
-                                        height: 200,
-                                        decoration: ShapeDecoration(
-                                          color: InductionAppColor.yellow,
-                                          shape: RoundedRectangleBorder(
-                                              borderRadius:
-                                                  BorderRadius.circular(10),
-                                              side: BorderSide(
-                                                  width: 0.50,
-                                                  color: InductionAppColor
-                                                      .darkGrey)),
-                                        ),
-                                      )),
-                                      const SizedBox(height: 10),
-                                      const Text(
+                                      SizedBox(height: 10),
+                                      Text(
                                         'Get in touch',
                                         textAlign: TextAlign.center,
                                         style: TextStyle(
