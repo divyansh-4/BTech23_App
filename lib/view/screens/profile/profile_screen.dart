@@ -41,8 +41,7 @@ class ProfilePage extends StatelessWidget {
               stream: FirebaseFirestore.instance
                   .collection("users")
                   .doc(FirebaseAuth.instance.currentUser!.uid)
-                  .get()
-                  .asStream(),
+                  .snapshots(),
               builder: (context, snapshot) {
                 if (snapshot.hasData) {
                   final userProfile = UserProfile.fromJson(
