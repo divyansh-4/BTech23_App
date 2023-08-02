@@ -7,6 +7,7 @@ import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 
+import '../data/event.dart';
 import '../data/user.dart';
 
 class FirebaseAuthService extends ChangeNotifier {
@@ -88,6 +89,15 @@ class FirebaseFirestoreService extends ChangeNotifier {
       final doc = await _firestore.collection("schedules").doc(day).get();
 
       return Schedule.fromJson(doc.data() as Map<String, dynamic>);
+    } catch (exception) {
+      rethrow;
+    }
+  }
+
+  Future<List<Event>> getEvents() {
+    try {
+      return _firestore.collection("events").get().then(
+          (value) => value.docs.map((e) => Event.fromJson(e.data())).toList());
     } catch (exception) {
       rethrow;
     }

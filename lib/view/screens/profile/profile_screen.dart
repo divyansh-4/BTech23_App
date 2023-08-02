@@ -158,7 +158,7 @@ class _ProfilePageState extends State<ProfilePage> {
                                               const Icon(Icons.edit, size: 12),
                                               const SizedBox(width: 4),
                                               Text(
-                                                userProfile.username,
+                                                userProfile.username!,
                                               ),
                                             ],
                                           ),
@@ -171,7 +171,7 @@ class _ProfilePageState extends State<ProfilePage> {
                                               color: Colors.white),
                                         ),
                                         Text(
-                                          userProfile.username,
+                                          userProfile.rollNumber!,
                                         ),
                                         const SizedBox(height: 8),
                                         Container(

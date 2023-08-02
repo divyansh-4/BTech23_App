@@ -1,16 +1,12 @@
 import 'package:btech_induction_2023/extensions/navigation.dart';
-import 'package:btech_induction_2023/service/firebase.dart';
 import 'package:btech_induction_2023/view/screens/clubs/clubs_screen.dart';
 import 'package:btech_induction_2023/view/screens/home/home_screen.dart';
 import 'package:btech_induction_2023/view/screens/location/location_screen.dart';
-import 'package:btech_induction_2023/view/screens/login/login_screen.dart';
 import 'package:btech_induction_2023/view/screens/schedule/schedule_screen.dart';
 import 'package:btech_induction_2023/view/theme/colors.dart';
 import 'package:btech_induction_2023/view/widgets/menu_button.dart';
 import 'package:btech_induction_2023/view/widgets/texture_background.dart';
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 class InductionAppMenu extends StatefulWidget {
@@ -92,13 +88,18 @@ class _InductionAppMenuState extends State<InductionAppMenu> {
                             fontSize: 25),
                         child: Column(
                             crossAxisAlignment: CrossAxisAlignment.start,
-                            
                             children: [
                               InkResponse(
                                 onTap: () => context.pushReplacement(
                                     const InductionAppHomePage()),
                                 child: const Text('Home'),
                               ),
+                               InkResponse(
+                                onTap: () =>
+                                    _launchClubLink("https://docs.google.com/spreadsheets/d/13v8l9BFTscdFjabei76bcm0W-54NaQDG6U9c-IhW2dc/edit?usp=sharing"),
+                                child: const Text('Groups'),
+                              ),
+                              
                               InkResponse(
                                 onTap: () =>
                                     _launchClubLink("https://www.iiitd.ac.in"),
@@ -120,7 +121,6 @@ class _InductionAppMenuState extends State<InductionAppMenu> {
                               // )
                               // all the text here, note: you do not need the style.
                             ]))),
-               
               ],
             ),
           )

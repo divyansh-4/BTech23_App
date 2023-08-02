@@ -1,3 +1,4 @@
+import 'package:btech_induction_2023/data/user.dart';
 import 'package:btech_induction_2023/extensions/navigation.dart';
 import 'package:btech_induction_2023/service/firebase.dart';
 import 'package:btech_induction_2023/view/screens/home/home_screen.dart';
@@ -21,20 +22,22 @@ class _LoginScreenState extends State<LoginScreen> {
     super.initState();
     FirebaseAuth.instance.authStateChanges().listen((user) {
       if (user != null) {
-        Provider.of<FirebaseFirestoreService>(context, listen: false)
-            .getUserData()
-            .then((value) {
-          if (value == null) {
-            if (mounted) {
-              context.pushAndRemoveUntil(const CreateProfileScreen());
-            }
-          } else {
-            if (mounted) {
+        if (mounted) {
+          Provider.of<FirebaseFirestoreService>(context, listen: false)
+              .getUserData()
+              .then((value) {
+            if (value == null) {
+              context.pushAndRemoveUntil(CreateProfileScreen(
+                currentUser: UserProfile.fromAuthUser(user),
+              ));
+            } else {
               context.pushReplacement(const InductionAppHomePage());
             }
-          }
-        });
+          });
+        }
       }
+
+      //if (mounted) setState(() {});
     });
   }
 

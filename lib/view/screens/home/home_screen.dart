@@ -2,15 +2,19 @@ import 'package:btech_induction_2023/data/event.dart';
 import 'package:btech_induction_2023/data/user.dart';
 import 'package:btech_induction_2023/extensions/navigation.dart';
 import 'package:btech_induction_2023/extensions/system.dart';
+import 'package:btech_induction_2023/service/firebase.dart';
 import 'package:btech_induction_2023/view/screens/home/event_tile.dart';
 import 'package:btech_induction_2023/view/screens/profile/profile_screen.dart';
 import 'package:btech_induction_2023/view/widgets/headline.dart';
 import 'package:btech_induction_2023/view/widgets/menu.dart';
 import 'package:btech_induction_2023/view/widgets/menu_icon.dart';
 import 'package:btech_induction_2023/view/widgets/texture_background.dart';
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:liquid_progress_indicator_v2/liquid_progress_indicator.dart';
+import 'package:provider/provider.dart';
 
 class InductionAppHomePage extends StatelessWidget {
   const InductionAppHomePage({Key? key}) : super(key: key);
@@ -58,10 +62,27 @@ class InductionAppHomePage extends StatelessWidget {
                                             padding: const EdgeInsets.all(5),
                                             child: userProfile.profileImage !=
                                                     null
-                                                ? CircleAvatar(
-                                                    backgroundImage:
-                                                        NetworkImage(userProfile
-                                                            .profileImage!),
+                                                ? SizedBox(
+                                                    width: 50,
+                                                    child: CircleAvatar(
+                                                      radius: 50,
+                                                      child: ClipRRect(
+                                                          borderRadius:
+                                                              BorderRadius
+                                                                  .circular(50),
+                                                          child:
+                                                              CachedNetworkImage(
+                                                            imageUrl: userProfile
+                                                                .profileImage!,
+                                                            fit: BoxFit.fill,
+                                                            width: 100,
+                                                            placeholder: (context,
+                                                                    url) =>
+                                                                Center(
+                                                                    child:
+                                                                        LiquidCircularProgressIndicator()),
+                                                          )),
+                                                    ),
                                                   )
                                                 : const CircleAvatar(
                                                     child: Icon(Icons.person))),
@@ -76,12 +97,35 @@ class InductionAppHomePage extends StatelessWidget {
                                   const HeadlineText(text: "events"),
                                   const SizedBox(height: 10),
                                   Expanded(
-                                      child: ListView.builder(
-                                          itemCount: Event.items().length,
-                                          itemBuilder: (context, index) =>
-                                              EventTile(
-                                                event: Event.items()[index],
-                                              ))),
+                                      child: FutureBuilder<List<Event>>(
+                                          future: Provider.of<
+                                                      FirebaseFirestoreService>(
+                                                  context)
+                                              .getEvents(),
+                                          builder: (context, snapshot) {
+                                            print(snapshot.data);
+                                            if (snapshot.hasData) {
+                                              return ListView.builder(
+                                                  itemCount:
+                                                      snapshot.data!.length,
+                                                  itemBuilder:
+                                                      (context, index) {
+                                                    return EventTile(
+                                                        event: snapshot
+                                                            .data![index]);
+                                                  });
+                                            } else if (snapshot.hasError) {
+                                              return const Center(
+                                                child: Text(
+                                                    "Something went wrong"),
+                                              );
+                                            } else {
+                                              return const Center(
+                                                child:
+                                                    CircularProgressIndicator(),
+                                              );
+                                            }
+                                          })),
                                 ],
                               ),
                             ));
