@@ -6,18 +6,21 @@ class InductionAppTextFormField extends StatelessWidget {
       required this.hintText,
       required this.labelText,
       required this.nameTextEditingController,
+      this.enabled,
       required this.validationText});
 
   final TextEditingController nameTextEditingController;
   final String labelText;
   final String hintText;
   final String validationText;
+  final bool? enabled;
 
   @override
   Widget build(BuildContext context) {
     return TextFormField(
       controller: nameTextEditingController,
       textAlign: TextAlign.center,
+      enabled: enabled,
       validator: (value) {
         if (value == null || value.isEmpty) {
           return validationText;

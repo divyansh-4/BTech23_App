@@ -27,13 +27,15 @@ class _CreateProfileScreenState extends State<CreateProfileScreen> {
   final GlobalKey<FormState> formKey = GlobalKey<FormState>();
   final TextEditingController nameTextEditingController =
       TextEditingController();
-  final TextEditingController phoneTextEditingController =
-      TextEditingController();
   final TextEditingController usernameTextEditingController =
+      TextEditingController();
+  final TextEditingController rollNumberTextEditingController =
       TextEditingController();
 
   File? _profileImage;
   String? _userProfileImageURL;
+  bool _ableToEditRollNumber = true;
+  bool upLoaderState = false;
 
   final ImagePicker _imagePicker = ImagePicker();
 
@@ -50,25 +52,28 @@ class _CreateProfileScreenState extends State<CreateProfileScreen> {
     super.initState();
     if (widget.currentUser != null) {
       nameTextEditingController.text = widget.currentUser!.fullName;
-      phoneTextEditingController.text = widget.currentUser!.phone ?? "";
-      usernameTextEditingController.text = widget.currentUser!.username;
+      usernameTextEditingController.text = widget.currentUser!.username ?? "";
+      rollNumberTextEditingController.text =
+          widget.currentUser!.rollNumber ?? "";
       _userProfileImageURL = widget.currentUser!.profileImage;
+      setState(
+          () => _ableToEditRollNumber = widget.currentUser!.rollNumber == null);
     }
   }
 
   @override
   void dispose() {
     nameTextEditingController.dispose();
-    phoneTextEditingController.dispose();
     usernameTextEditingController.dispose();
+    rollNumberTextEditingController.dispose();
     super.dispose();
   }
 
   void _saveProfile(BuildContext context) {
     UserProfile user = UserProfile(
       fullName: nameTextEditingController.text,
-      phone: phoneTextEditingController.text,
       username: usernameTextEditingController.text,
+      rollNumber: rollNumberTextEditingController.text,
       profileImage: _userProfileImageURL ?? widget.currentUser!.profileImage,
       points: widget.currentUser!.points ?? 0,
     );
@@ -84,13 +89,19 @@ class _CreateProfileScreenState extends State<CreateProfileScreen> {
 
   @override
   Widget build(BuildContext context) {
-    final upLoaderState = context.read<FirebaseStorageService>().isUploading;
     return Scaffold(
       appBar: AppBar(
         title: SizedBox(
           child: Image.asset("images/iiitd.png", height: 200),
         ),
         centerTitle: true,
+        leading: context.canPop()
+            ? IconButton(
+                onPressed: () {
+                  context.pop();
+                },
+                icon: const Icon(Icons.arrow_back))
+            : const SizedBox(width: 50),
         actions: const [
           SizedBox(
             width: 50,
@@ -107,6 +118,7 @@ class _CreateProfileScreenState extends State<CreateProfileScreen> {
               padding: const EdgeInsets.all(16.0),
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
+                mainAxisSize: MainAxisSize.max,
                 children: [
                   Expanded(
                     child: Stack(
@@ -114,7 +126,7 @@ class _CreateProfileScreenState extends State<CreateProfileScreen> {
                         Positioned(
                             top: 220,
                             left: context.width * 0.025,
-                            right: 0,
+                            right: context.width * 0.025,
                             bottom: 0,
                             child: const CascadeCard(child: SizedBox())),
                         Positioned(
@@ -151,6 +163,7 @@ class _CreateProfileScreenState extends State<CreateProfileScreen> {
                               children: <Widget>[
                                 ElevatedButton(
                                   onPressed: () {
+                                    setState(() => upLoaderState = true);
                                     _pickImage(ImageSource.gallery)
                                         .whenComplete(() {
                                       Provider.of<FirebaseStorageService>(
@@ -161,6 +174,7 @@ class _CreateProfileScreenState extends State<CreateProfileScreen> {
                                           .then((value) {
                                         setState(() {
                                           _userProfileImageURL = value;
+                                          upLoaderState = false;
                                         });
                                       });
                                     });
@@ -178,21 +192,28 @@ class _CreateProfileScreenState extends State<CreateProfileScreen> {
                                         nameTextEditingController,
                                     validationText:
                                         "Please enter your full name"),
-                                const SizedBox(height: 20),
-                                InductionAppTextFormField(
-                                    hintText: "Mobile number",
-                                    labelText: "Enter your mobile number",
-                                    nameTextEditingController:
-                                        phoneTextEditingController,
-                                    validationText: "Please enter your phone"),
-                                const SizedBox(height: 20),
+                                const SizedBox(height: 10),
                                 InductionAppTextFormField(
                                     hintText: "Username",
-                                    labelText: "username",
+                                    labelText: "Enter your username",
                                     nameTextEditingController:
                                         usernameTextEditingController,
+                                    validationText: "Please enter your username"),
+                                const SizedBox(height: 5),
+                                const Text(
+                                  "Your roll number is final, you won't be able to change it later",
+                                  style: TextStyle(
+                                      fontSize: 10, color: Colors.white),
+                                ),
+                                const SizedBox(height: 10),
+                                InductionAppTextFormField(
+                                    enabled: _ableToEditRollNumber,
+                                    hintText: "Roll number",
+                                    labelText: "Enter your roll number",
+                                    nameTextEditingController:
+                                        rollNumberTextEditingController,
                                     validationText:
-                                        "Please enter your username"),
+                                        "Please enter your rollNumber"),
                                 !upLoaderState
                                     ? ElevatedButton(
                                         onPressed: () {
@@ -211,7 +232,7 @@ class _CreateProfileScreenState extends State<CreateProfileScreen> {
                               ],
                             ),
                           ),
-                        )
+                        ),
                       ],
                     ),
                   ),

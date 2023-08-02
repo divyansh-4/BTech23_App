@@ -1,5 +1,3 @@
-import 'package:btech_induction_2023/data/step_info.dart';
-
 class Schedule {
   final String date;
 
