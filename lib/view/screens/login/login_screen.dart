@@ -47,8 +47,8 @@ class _LoginScreenState extends State<LoginScreen> {
         ),
         centerTitle: true,
         leading: const SizedBox(
-            width: 50,
-          ),
+          width: 50,
+        ),
         actions: const [
           SizedBox(
             width: 50,

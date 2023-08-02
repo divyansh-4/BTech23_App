@@ -1,6 +1,8 @@
 import 'package:btech_induction_2023/data/user.dart'; // Replace this with the actual implementation of the UserProfile class
 import 'package:btech_induction_2023/extensions/navigation.dart';
 import 'package:btech_induction_2023/extensions/system.dart';
+import 'package:btech_induction_2023/service/firebase.dart';
+import 'package:btech_induction_2023/view/screens/login/login_screen.dart';
 import 'package:btech_induction_2023/view/screens/profile/create_profile_screen.dart';
 import 'package:btech_induction_2023/view/theme/colors.dart';
 import 'package:btech_induction_2023/view/widgets/custom_card.dart';
@@ -8,11 +10,30 @@ import 'package:btech_induction_2023/view/widgets/texture_background.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 import '../../widgets/headline.dart';
 
-class ProfilePage extends StatelessWidget {
+class ProfilePage extends StatefulWidget {
   const ProfilePage({Key? key}) : super(key: key);
+
+  @override
+  State<ProfilePage> createState() => _ProfilePageState();
+}
+
+class _ProfilePageState extends State<ProfilePage> {
+  @override
+  void initState() {
+    super.initState();
+
+    FirebaseAuth.instance.authStateChanges().listen((user) {
+      if (user == null) {
+        if (mounted) {
+          context.pushAndRemoveUntil(const LoginScreen());
+        }
+      }
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -176,6 +197,14 @@ class ProfilePage extends StatelessWidget {
                               ],
                             ),
                           ),
+                          const SizedBox(height: 18),
+                          MaterialButton(
+                              onPressed: () {
+                                Provider.of<FirebaseAuthService>(context,
+                                        listen: false)
+                                    .signOut();
+                              },
+                              child: const Text("Logout"))
                         ],
                       ));
                 } else {
